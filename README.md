@@ -1,5 +1,5 @@
 # OSS_Term_Project
-open source software term project
+open source software term project<br>
 RNN을 통한 비트코인 시세 동향 예측 프로그램입니다.<br>
 비트코인의 시세동향 참고지표로 사용할 수 있습니다.
 
