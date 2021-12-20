@@ -8,7 +8,7 @@ def get_price(interval='day'):
     return price
 
 def update_predict(interval):
-    time, percent = prediction.LSTM(get_price(interval))
+    time, percent = prediction.RNN(get_price(interval), interval)
     pred_data = {'time': time, 'pred': percent}
     pred_data = pd.DataFrame([pred_data])
     file = f'./data/{interval}_predict.csv'

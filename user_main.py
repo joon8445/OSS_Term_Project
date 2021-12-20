@@ -32,14 +32,13 @@ class WindowClass(QMainWindow, form_class):
         chart.draw_chart(self, text)
         self.canvas.draw()
 
-    def clear(self, L=False):
+    def clear(self):
         self.prediction.clear()
 
-        if not L:
-            L = self.chart
-        if L is not None:
-            while L.count():
-                item = L.takeAt(0)
+        tmp = self.chart
+        if tmp is not None:
+            while tmp.count():
+                item = tmp.takeAt(0)
 
                 widget = item.widget()
 

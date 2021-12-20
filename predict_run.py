@@ -12,12 +12,28 @@ if __name__ == '__main__':
         print(interval)
         df = data_manager.get_price(interval)
         pred_file = f'./data/{interval}_predict.csv'
-        time = df.index[-1]
+
+        if interval == 'hour6':
+            if df.index[-1].hour % 6 != 0:
+                df = df[:-1]
+
+        elif interval == 'hour12':
+            if df.index[-1].hour % 12 != 0:
+                df = df[:-1]
+
+        elif interval == 'day':
+            if df.index[-1].hour != 0:
+                df = df[:-1]
+
+        time = str(df.index[-1])
+
         if os.path.exists(pred_file):
             predict = pd.read_csv(pred_file)
-            if predict.date.iloc[-1] == time:
+            if predict.time.iloc[-1] == time:
                 print('already predicted')
             else:
+                print('predict yet')
                 data_manager.update_predict(interval)
         else:
+            print('predict yet')
             data_manager.update_predict(interval)

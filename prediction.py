@@ -8,8 +8,19 @@ from tensorflow.keras.layers import Dense, LSTM, Dropout
     modified by s-jun
 """
 
-def LSTM(df):
+def RNN(df ,interval):
     raw_df = df
+    if interval == 'hour6':
+        if raw_df.index[-1].hour % 6 != 0:
+            raw_df = raw_df[:-1]
+    elif interval == 'hour12':
+        if raw_df.index[-1].hour % 12 != 0:
+            raw_df = raw_df[:-1]
+    elif interval == 'day':
+        if raw_df.index[-1].hour != 0:
+            raw_df = raw_df[:-1]
+
+
 
     def MinMaxScaler(data):
         """최솟값, 최댓값 이용해 0~1 값으로 변환"""
@@ -60,4 +71,4 @@ def LSTM(df):
     percentage = round(((predict_price_tommorow / predict_price_today - 1) * 100), 3)
     percentage = str(percentage) + '%'
 
-    return df.index[-1], percentage
+    return str(raw_df.index[-1]), percentage
