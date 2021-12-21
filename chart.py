@@ -8,7 +8,7 @@ def draw_chart(self, chart_interval='1일'):
         "1일": "day", "12시간": "hour12", "6시간": "hour6", "1시간": "hour"
     }[chart_interval]
 
-    df = data_manager.get_price(interval)
+    df = data_manager.get_price(interval, view_all=True)
     df = df[-90:-1]
 
     self.ax = self.fig.subplots()

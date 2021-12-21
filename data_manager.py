@@ -3,12 +3,24 @@ import pandas as pd
 import os
 import prediction
 
-def get_price(interval='day'):
+def get_price(interval='day', view_all=False):
     price = pybithumb.get_ohlcv("BTC", interval=interval)
+    if not view_all:
+        if interval == 'hour6':
+            if price.index[-1].hour % 6 != 0:
+                price = price[:-1]
+
+        elif interval == 'hour12':
+            if price.index[-1].hour % 12 != 0:
+                price = price[:-1]
+
+        elif interval == 'day':
+            if price.index[-1].hour != 0:
+                price = price[:-1]
     return price
 
 def update_predict(interval):
-    time, percent = prediction.RNN(get_price(interval), interval)
+    time, percent = prediction.RNN(get_price(interval))
     pred_data = {'time': time, 'pred': percent}
     pred_data = pd.DataFrame([pred_data])
     file = f'./data/{interval}_predict.csv'

@@ -8,17 +8,8 @@ from tensorflow.keras.layers import Dense, LSTM, Dropout
     modified by s-jun
 """
 
-def RNN(df ,interval):
+def RNN(df):
     raw_df = df
-    if interval == 'hour6':
-        if raw_df.index[-1].hour % 6 != 0:
-            raw_df = raw_df[:-1]
-    elif interval == 'hour12':
-        if raw_df.index[-1].hour % 12 != 0:
-            raw_df = raw_df[:-1]
-    elif interval == 'day':
-        if raw_df.index[-1].hour != 0:
-            raw_df = raw_df[:-1]
 
 
 

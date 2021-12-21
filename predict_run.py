@@ -13,17 +13,6 @@ if __name__ == '__main__':
         df = data_manager.get_price(interval)
         pred_file = f'./data/{interval}_predict.csv'
 
-        if interval == 'hour6':
-            if df.index[-1].hour % 6 != 0:
-                df = df[:-1]
-
-        elif interval == 'hour12':
-            if df.index[-1].hour % 12 != 0:
-                df = df[:-1]
-
-        elif interval == 'day':
-            if df.index[-1].hour != 0:
-                df = df[:-1]
 
         time = str(df.index[-1])
 
